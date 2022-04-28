@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<extensions xmlns="http://www.demandware.com/xml/bmmodules/2007-12-11" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.demandware.com/xml/bmmodules/2007-12-11 bmext.xsd">
+    <menuitem id="credovaIntegration" position="1999" site="false">
+		<name xml:lang="x-default">Credova</name>
+		<short_description xml:lang="x-default">Credova Integration</short_description>
+		<description xml:lang="x-default">Credova Integration</description>
+		<icon>icons/channel_ico.gif</icon>
+	</menuitem>
+	
+	<menuaction id="credovaIntegrations" menupath="credovaIntegration" position="9003" site="false">
+		<name xml:lang="x-default">Credova Quick Setup</name>
+		<short_description xml:lang="x-default">
+			Credova Quick Setup
+		</short_description>
+		<description xml:lang="x-default">
+			Credova Quick Setup
+		</description>
+		<exec pipeline="CredovaBM" node="QuickSetup" />
+		<sub-pipelines>
+			<pipeline name="CredovaBM-QuickSetup" />
+			<pipeline name="CredovaBM-HandleCredovaQuickSetup" />
+		</sub-pipelines>
+		<parameters>
+		</parameters>
+		<permissions>
+		</permissions>
+		<icon>icons/channel_ico.gif</icon>
+	</menuaction>
+	
+	<menuitem id="credovaSite" position="9000" site="true">
+		<name xml:lang="x-default">Credova</name>
+		<short_description xml:lang="x-default">Credova</short_description>
+		<description xml:lang="x-default">Credova</description>
+		<icon>icons/channel_ico.gif</icon>
+	</menuitem>
+	
+	<menuaction id="creadovaPaymentsMethods" menupath="credovaSite" position="9001" site="true">
+		<name xml:lang="x-default">Credova Payment Methods Setup</name>
+		<short_description xml:lang="x-default">
+			Credova Payment Methods Setup
+		</short_description>
+		<description xml:lang="x-default">
+			Credova Payment Methods Setup
+		</description>
+		<exec pipeline="CredovaBM" node="PaymentsSetup" />
+		<sub-pipelines>
+			<pipeline name="CredovaBM-PaymentsSetup" />
+			<pipeline name="CredovaBM-HandlePaymentsSetup" />
+		</sub-pipelines>
+		<parameters>
+		</parameters>
+		<permissions>
+		</permissions>
+		<icon>icons/sitespaymentmethods_ico.gif</icon>
+	</menuaction>
+	
+	<menuaction id="credovaPaymentsRefund" menupath="credovaSite" position="9002" site="true">
+		<name xml:lang="x-default">Credova Payments Refund</name>
+		<short_description xml:lang="x-default">
+			Credova Payments Refund
+		</short_description>
+		<description xml:lang="x-default">
+			Credova Payments Refund
+		</description>
+		<exec pipeline="CredovaBM" node="PaymentsRefund" />
+		<sub-pipelines>
+			<pipeline name="CredovaBM-PaymentsRefund" />
+			<pipeline name="CredovaBM-HandlePaymentsRefund" />
+		</sub-pipelines>
+		<parameters>
+		</parameters>
+		<permissions>
+		</permissions>
+		<icon>icons/sitespaymentmethods_ico.gif</icon>
+	</menuaction>
+
+</extensions>

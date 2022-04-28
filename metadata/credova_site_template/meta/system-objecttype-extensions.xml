@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="Product">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="credovaDisableCheckout">
+                <display-name xml:lang="x-default">Disable Credova on checkout </display-name>
+                <type>boolean</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="credovaEnabledListing">
+                <display-name xml:lang="x-default">Enable Credova ALA on Listing and Product page </display-name>
+                <type>boolean</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="CREDOVA">
+                <display-name xml:lang="x-default">Credova</display-name>
+                <attribute attribute-id="credovaDisableCheckout"/>
+                <attribute attribute-id="credovaEnabledListing"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="credovaCountryCode">
+                <display-name xml:lang="x-default">Country Code (Credova Payment Request Button)</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>US</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="credovaApiUsername">
+                <display-name xml:lang="x-default">Credova API Username</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="credovaApiUrl">
+                <display-name xml:lang="x-default">Credova Api URL</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>https://sandbox-lending-api.credova.com</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="credovaEnabled">
+                <display-name xml:lang="x-default">Credova Enabled</display-name>
+                <description xml:lang="x-default">Enables or disables the cartridge</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="credovaPassword">
+                <display-name xml:lang="x-default">Credova Password</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="credovaMode">
+                <display-name xml:lang="x-default">Mode</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="credovaMinAmount">
+                <display-name xml:lang="x-default">Credova Minimum Amount</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>300</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="credovaMaxAmount">
+                <display-name xml:lang="x-default">Credova Maximum Amount</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>1000</default-value>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="CREDOVA">
+                <display-name xml:lang="x-default">Credova</display-name>
+                <attribute attribute-id="credovaApiUsername"/>
+                <attribute attribute-id="credovaApiUrl"/>
+                <attribute attribute-id="credovaPassword"/>
+                <attribute attribute-id="credovaMode"/>
+                <attribute attribute-id="credovaMaxAmount"/>
+                <attribute attribute-id="credovaMinAmount"/>
+                <attribute attribute-id="credovaEnabled"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+    <type-extension type-id="OrderPaymentInstrument">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="publicId">
+                <display-name xml:lang="x-default">Public ID</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="applicationId">
+                <display-name xml:lang="x-default">Application ID</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+    </type-extension>
+</metadata>
