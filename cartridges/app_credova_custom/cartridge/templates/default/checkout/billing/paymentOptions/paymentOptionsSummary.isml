@@ -1,0 +1,11 @@
+<div class="payment-details xdvds">
+    <isloop items="${pdict.order.billing.payment.selectedPaymentInstruments}" var="payment">
+        ${payment.paymentMethod}
+        <isif condition="${payment.paymentMethod === 'CREDIT_CARD'}">
+            <isinclude template="checkout/billing/paymentOptions/creditCardSummary" />
+        </isif>
+        <isif condition="${payment.paymentMethod === 'CREDOVA'}">
+            <isinclude template="checkout/billing/paymentOptions/credovaSummary" />
+        </isif>
+    </isloop>
+</div>

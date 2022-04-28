@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19">
+
+    <!-- field for edit credit card number -->
+    <field formid="paymentMethod" type="string" mandatory="true" />
+
+    <field formid="publicId" label="profile.publicid" type="string" mandatory="true" binding="publicId"
+           max-length="100" missing-error="error.message.required" />
+</form>

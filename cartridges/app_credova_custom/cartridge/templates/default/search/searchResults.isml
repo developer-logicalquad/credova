@@ -1,0 +1,33 @@
+<isdecorate template="common/layout/page">
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets');
+        assets.addJs('/js/search.js');
+        assets.addCss('/css/search.css');
+    </isscript>
+
+    <isinclude template="search/searchResultsNoDecorator" />
+</isdecorate>
+<script src="https://plugin.credova.com/plugin.min.js"></script>
+ <script>
+    if('${dw.system.Site.current.preferences.custom.credovaMode}' === 'Live'){
+      CRDV.plugin.config({ environment: CRDV.Environment.Production, store: "${dw.system.Site.current.preferences.custom.credovaApiUsername}" });
+    }else{
+      CRDV.plugin.config({ environment: CRDV.Environment.Sandbox, store: "${dw.system.Site.current.preferences.custom.credovaApiUsername}" });
+    }
+    CRDV.plugin.inject("credova-button");
+    CRDV.plugin.addEventListener(function(e) {
+    if (e.eventName === CRDV.EVENT_USER_WAS_APPROVED) {
+      //alert("User was approved and publicId is " + e.eventArgs.publicId);
+            $.ajax({
+                url: '${URLUtils.url('Credova-Set')}',
+                type: 'post',
+                data: {public_id:e.eventArgs.publicId},
+                success: function (data) {
+                },
+                error: function (err) {
+
+                }
+            });
+        }
+        });
+</script>

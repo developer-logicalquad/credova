@@ -1,0 +1,6 @@
+<div class="credit-card-type">
+    <span>${Resource.msg('paymentmethod.name','credova', null)}</span>
+    <div>${Resource.msg('paymentmethod.label.publicid','credova', null)}: <span id="credova-public-id">${session.privacy.publicId}</span></div>
+    <input type="hidden" id="credova-api-mode" value="${dw.system.Site.current.preferences.custom.credovaMode}" />
+    <input type="hidden" id="credova-api-key" value="${dw.system.Site.current.preferences.custom.credovaApiUsernamekey}" />
+</div>

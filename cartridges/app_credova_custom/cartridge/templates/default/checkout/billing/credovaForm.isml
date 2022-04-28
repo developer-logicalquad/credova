@@ -1,0 +1,7 @@
+<isset name="credovaFields" value="${pdict.forms.billingForm.credovaFields}" scope="page"/>
+
+<!--- Hidden input for credit card type --->
+
+    <input type="hidden" class="form-control" name="${credovaFields.publicId.htmlName}" id="publicId" value="" />
+    <input type="hidden" id="api-creds-url" value="${URLUtils.url('Credova-Get')}" />
+    <p class="credova-button">${Resource.msg('paymentmethod.label.formtext','credova', null)}</p>

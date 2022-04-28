@@ -1,0 +1,13 @@
+<script src="https://plugin.credova.com/plugin.min.js"></script>
+<li class="nav-item" data-method-id="${paymentOption.ID}">
+    <a class="nav-link credova-tab" data-toggle="tab" href="#credova-content" role="tab">
+        <img class="credit-card-option"
+                src="${URLUtils.staticURL('/images/credova.png')}"
+                height="32"
+                alt="${paymentOption.name}"
+                title="${paymentOption.name}"
+        />
+    </a>
+</li>
+<hr />
+<hr />

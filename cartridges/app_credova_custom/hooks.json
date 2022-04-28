@@ -1,0 +1,12 @@
+{
+    "hooks": [
+        {
+            "name": "app.payment.processor.credova",
+            "script": "./cartridge/scripts/hooks/payment/processor/credova"
+        },
+        {
+            "name": "app.payment.form.processor.credova",
+            "script": "./cartridge/scripts/hooks/payment/processor/credova_form_processor"
+        }
+    ]
+}

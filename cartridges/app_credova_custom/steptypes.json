@@ -1,0 +1,32 @@
+{
+    "step-types": {
+        "script-module-step": [
+            {
+                "@type-id": "custom.CredovaUpdateOrderStatus",
+                "@supports-parallel-execution": "false",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Processes webhooks notifications received from Credova and saved in custom objects",
+                "module": "app_credova_custom/cartridge/scripts/credova/jobs/processSavedOrders.js",
+                "transactional": "false",
+                "timeout-in-seconds": "18000",
+                "status-codes": {
+                    "status": [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        },
+                        {
+                            "@code": "OK",
+                            "description": "Used when the step finished successfully."
+                        },
+                        {
+                            "@code": "FINISHED_WITH_WARNINGS",
+                            "description": "Used when the step finished with warnings."
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

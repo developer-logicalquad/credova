@@ -1,0 +1,24 @@
+{
+    "application.create": {
+        "publicId": "cus_FC8AIrhLkUmwrA",
+        "link": "customer"
+    },
+    "application.retrieve":{
+        "applicationId": 2100006835,
+        "publicId": "7def601b-548e-4ccf-b312-391291dca1fe",
+        "phone": "835-189-4108",
+        "status": "Signed",
+        "approvalAmount": 4000.00,
+        "borrowedAmount": 447.20,
+        "totalInStorePayment": 0.000000,
+        "lenderCode": "CSB",
+        "lenderName": "Cornerstone Bank",
+        "lenderDisplayName": "Cornerstone Bank",
+        "financingPartnerCode": "CSB",
+        "financingPartnerName": "Cornerstone Bank",
+        "financingPartnerDisplayName": "Cornerstone Bank",
+        "paymentInfo": null
+    },
+    "application.update": {},
+    "application.return": {}
+}
