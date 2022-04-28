@@ -121,7 +121,7 @@ function getCredovaToken() {
          *   communicated.
          */
         filterLogMessage: function (msg) {
-            return maskCVC(maskCardNumber(msg));
+            return (msg);
         }
     });
 }
