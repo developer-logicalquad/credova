@@ -1,7 +1,3 @@
-/* eslint-env es6 */
-/* eslint-disable no-plusplus */
-/* global empty */
-
 'use strict';
 
 var Transaction = require('dw/system/Transaction');
@@ -22,10 +18,10 @@ var logger = Logger.getLogger('Credova', 'credova');
  * @returns {null} - Payment Instrument for credova
  */
 function getCredovaPaymentInstrument(order) {
-    for (let i = 0; i < order.paymentInstruments.length; i++) {
-        let paymentInstrument = order.paymentInstruments[i];
-        let paymentTransaction = paymentInstrument.paymentTransaction;
-        let paymentProcessor = paymentTransaction && paymentTransaction.paymentProcessor;
+    for (var i = 0; i < order.paymentInstruments.length; i++) {
+        var paymentInstrument = order.paymentInstruments[i];
+        var paymentTransaction = paymentInstrument.paymentTransaction;
+        var paymentProcessor = paymentTransaction && paymentTransaction.paymentProcessor;
         if (paymentProcessor && 'CREDOVA'.equals(paymentProcessor.ID)) {
             return paymentInstrument;
         }
@@ -47,7 +43,6 @@ function placeOrder(order, credovaPaymentInstrument) {
     if (serviceResult) {
         var data = (serviceResult);
         if (data.status === 'Signed') {
-           // let curOrder = OrderMgr.getOrder(order.orderNo);
             Transaction.wrap(function () {
                 order.setConfirmationStatus(Order.CONFIRMATION_STATUS_CONFIRMED);
                 order.setPaymentStatus(Order.PAYMENT_STATUS_PAID);
@@ -56,32 +51,23 @@ function placeOrder(order, credovaPaymentInstrument) {
         }
         credovaLogger.info('Successfully processed Order with order id:{0}.', order.orderNo);
         return true;
-    } else {
-        return false;
     }
+    return false;
 }
-
 
 exports.execute = function () {
     var queryString = 'paymentStatus={0}';
     var Orders = OrderMgr.searchOrders(queryString, 'orderNo desc', 0);
     while (Orders.hasNext()) {
         try {
-            let order = Orders.next();
-            const credovaPaymentInstrument = getCredovaPaymentInstrument(order);
+            var order = Orders.next();
+            var credovaPaymentInstrument = getCredovaPaymentInstrument(order);
             if (credovaPaymentInstrument) {
                 placeOrder(order, credovaPaymentInstrument);
             }
         } catch (e) {
             logger.error('Error: {0}', e.message);
-        } finally {
-                // if (credovaObjectsIter) {
-                //     try {
-                //         credovaObjectsIter.close();
-                //     } catch (e) {
-                //         Logger.error('Failed to close seekable iterator.');
-                //     }
-                // }
+            return new Status(Status.ERROR);
         }
     }
     return new Status(Status.OK);

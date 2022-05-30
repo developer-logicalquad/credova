@@ -1,7 +1,9 @@
 /* eslint-env es6 */
 /* eslint-disable no-console */
 /* eslint-disable no-plusplus */
+
 'use strict';
+
 var ready = (callback) => {
     if (document.readyState !== 'loading') {
         callback();

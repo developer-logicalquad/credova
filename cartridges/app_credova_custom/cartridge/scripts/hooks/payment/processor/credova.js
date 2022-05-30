@@ -14,7 +14,7 @@ var Transaction = require('dw/system/Transaction');
  * @param {Object} req the request object
  * @return {Object} returns an error object
  */
-function Handle(basket, paymentInformation, paymentMethodID, req) {
+function Handle(basket, paymentInformation, paymentMethodID) {
     var collections = require('*/cartridge/scripts/util/collections');
     var currentBasket = basket;
     var cardErrors = {};

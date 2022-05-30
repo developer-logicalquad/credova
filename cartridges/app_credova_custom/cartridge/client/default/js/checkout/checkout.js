@@ -328,12 +328,12 @@ var scrollAnimate = require('base/components/scrollAnimate');
                             method: 'GET',
                             success: function (dataCred) {
                                 if (dataCred.apimode === 'live') {
-                                    CRDV.plugin.config({ environment: CRDV.Environment.Production, store: dataCred.apikey });
+                                    CRDV.plugin.config({ environment: CRDV.Environment.Production, store: dataCred.apikey }); // eslint-disable-line no-undef
                                 } else {
-                                    CRDV.plugin.config({ environment: CRDV.Environment.Sandbox, store: dataCred.apikey });
+                                    CRDV.plugin.config({ environment: CRDV.Environment.Sandbox, store: dataCred.apikey }); // eslint-disable-line no-undef
                                 }
                                 var publicId = $('#credova-public-id').text();
-                                CRDV.plugin.checkout(publicId).then(function (completed) {
+                                CRDV.plugin.checkout(publicId).then(function (completed) { // eslint-disable-line no-undef
                                     if (completed) {
                                         $.ajax({
                                             url: $('.place-order').data('action'),

@@ -4,51 +4,66 @@
     <h1 class="dw-nc-text-heading dw-nc-text-heading-large dw-nc-text-brand">${Resource.msg('paymentsrefund.title','credovabm', null)}</h1>
     <p>${Resource.msg('paymentsrefund.info','credovabm', null)}</p>
 
-    <form class="credova-payments-setup-form" id="stripe-payments-setup-form" action="${URLUtils.url('CredovaBM-HandlePaymentsRefund')}" method="POST">
+    <form class="credova-payments-setup-form" id="stripe-payments-setup-form"
+		action="${URLUtils.url('CredovaBM-HandlePaymentsRefund')}" method="POST">
 
-        <table width="100%" cellspacing="15" cellpadding="0" border="0">
-            <tbody>
-                <tr>
-                    <td style="width:30%">${Resource.msg('paymentsrefund.ordernumber','stripebm', null)}</td>
-                    <td style="width:70%"><input id="credova_order_number" name="credova_order_number" placeholder="DW00000001" required /></td>
-                </tr>
-                <tr>
-                    <td style="width:30%">${Resource.msg('paymentsrefund.returntype','credovabm', null)}</td>
-                    <td style="width:70%">
-                        <select id="credova_return_type" name="credova_return_type" required>
-                            <option value="">${Resource.msg('paymentsrefund.returntype.select','credovabm', null)}</option>
-                            <option value="1">${Resource.msg('paymentsrefund.returntype.redraft','credovabm', null)}</option>
-                            <option value="2">${Resource.msg('paymentsrefund.returntype.return','credovabm', null)}</option>
+	    <table width="100%" cellspacing="15" cellpadding="0" border="0">
+			<tbody>
+				<tr>
+					<td style="width:30%">
+						${Resource.msg('paymentsrefund.ordernumber','stripebm', null)}
+					</td>
+					<td style="width:70%">
+						<input id="credova_order_number" name="credova_order_number" placeholder="DW00000001" required />
+					</td>
+				</tr>
+				<tr>
+					<td style="width:30%">
+						${Resource.msg('paymentsrefund.returntype','credovabm', null)}
+					</td>
+					<td style="width:70%">
+						<select id="credova_return_type" name="credova_return_type" required>
+							<option value="">Select Return Type</option>
+							<option value="1">Redraft</option>
+                            <option value="2">Return</option>
                         </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:30%">${Resource.msg('paymentsrefund.returnreason','credovabm', null)}</td>
-                    <td style="width:70%">
-                        <select id="credova_return_reason" name="credova_return_reason" required>
-                            <option value="">${Resource.msg('paymentsrefund.returnreason.select','credovabm', null)}Select Return Reason</option>
-                            <option value="19a1ad6d-ba36-44c3-8243-1b039503ee81">${Resource.msg('paymentsrefund.returnreason.label1','credovabm', null)}</option>
-                            <option value="95cd3030-0b86-4ba4-9099-b649b77ed93c">${Resource.msg('paymentsrefund.returnreason.label2','credovabm', null)}</option>
-                            <option value="be1d8c78-ca3d-4a6c-9361-a5bf9bd22b2c">${Resource.msg('paymentsrefund.returnreason.label3','credovabm', null)}</option>
-                            <option value="ea2a7ec8-828c-4cfd-ba8f-47dbb0b4f7a9">${Resource.msg('paymentsrefund.returnreason.label4','credovabm', null)}</option>
-                            <option value="3dc65403-8ab5-4797-be51-060d2b626cd4">${Resource.msg('paymentsrefund.returnreason.label5','credovabm', null)}</option>
-                            <option value="4d593f76-4b29-4df0-9a1c-834da01b6177">${Resource.msg('paymentsrefund.returnreason.label6','credovabm', null)}</option>
-                            <option value="843cc397-9d58-495e-aff7-38f2c72b9266">${Resource.msg('paymentsrefund.returnreason.label7','credovabm', null)}</option>
-                            <option value="0a1464e5-f946-4473-a721-57231bd43ca3">${Resource.msg('paymentsrefund.returnreason.label8','credovabm', null)}</option>
-                            <option value="b82ee780-406f-460a-96a1-2628c4aa5e36">${Resource.msg('paymentsrefund.returnreason.label9','credovabm', null)}</option>
-                            <option value="d43b7a46-6f57-45b1-8d58-e2069fbbd6cf">${Resource.msg('paymentsrefund.returnreason.label10','credovabm', null)}</option>
+					</td>
+				</tr>
+				<tr>
+					<td style="width:30%">
+						${Resource.msg('paymentsrefund.returnreason','credovabm', null)}
+					</td>
+					<td style="width:70%">
+						<select id="credova_return_reason" name="credova_return_reason" required>
+							<option value="">Select Return Reason</option>
+							<option value="19a1ad6d-ba36-44c3-8243-1b039503ee81">Customer decided against the purchase</option>
+							<option value="95cd3030-0b86-4ba4-9099-b649b77ed93c">Customer did not pass background check</option>
+							<option value="be1d8c78-ca3d-4a6c-9361-a5bf9bd22b2c">Customer paid via other method</option>
+                            <option value="ea2a7ec8-828c-4cfd-ba8f-47dbb0b4f7a9">Defective product</option>
+                            <option value="3dc65403-8ab5-4797-be51-060d2b626cd4">Item out of stock</option>
+                            <option value="4d593f76-4b29-4df0-9a1c-834da01b6177">Order failed</option>
+                            <option value="843cc397-9d58-495e-aff7-38f2c72b9266">Pet Health</option>
+                            <option value="0a1464e5-f946-4473-a721-57231bd43ca3">Product/s not state compliant</option>
+                            <option value="b82ee780-406f-460a-96a1-2628c4aa5e36">Redraft - Change to financed amount</option>
+                            <option value="d43b7a46-6f57-45b1-8d58-e2069fbbd6cf">Redraft - New items</option>
                         </select>
-                    </td>
-                </tr>
-                <tr><td colspan="2"><strong id="payment-refund-result"></strong></td></tr>
-                <tr>
-                    <td style="width:20%">
-                        <button type="submit" name="submit" class="button stripe-payment-refund-submit">${Resource.msg('paymentsrefund.issuerefund','stripebm', null)}</button>
-                    </td>
-                    <td style="width:80%"></td>
-                </tr>
-            </tbody>
-        </table>
+					</td>
+				</tr>
+	            <tr>
+					<td colspan="2">
+						<strong id="payment-refund-result"></strong>
+					</td>
+				</tr>
+				<tr>
+					<td style="width:20%">
+						<button type="submit" name="submit" class="button stripe-payment-refund-submit">${Resource.msg('paymentsrefund.issuerefund','stripebm', null)}</button>
+					</td>
+					<td style="width:80%">
+					</td>
+				</tr>
+			</tbody>
+	    </table>
     </form>
-    <script src="${URLUtils.staticURL('js/credovabm.js')}"></script>
+    
+    <script type="text/javascript" src="${URLUtils.staticURL('js/credovabm.js')}"></script>
 </isdecorate>

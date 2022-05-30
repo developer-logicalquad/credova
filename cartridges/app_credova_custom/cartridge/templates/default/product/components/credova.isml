@@ -1,6 +1,6 @@
-<isif condition="${product.price.sales.decimalPrice >= 300.00}">
-    <isif condition="${product.price.sales.decimalPrice >= 300.00}">
-
+<isset name="siteCustomPref" value="${dw.system.Site.current.preferences.custom}" scope="page" />
+<isif condition="${'credovaEnabled' in siteCustomPref && siteCustomPref.credovaEnabled}">
+    <isif condition="${product.price.sales.decimalPrice >= parseFloat(siteCustomPref.credovaMinAmount) && product.price.sales.decimalPrice <= parseFloat(siteCustomPref.credovaMaxAmount)}">
         <div class="product-number-rating clearfix">
 
         <div class="ratings pull-right" >
@@ -13,16 +13,15 @@
 
         <script src="https://plugin.credova.com/plugin.min.js"></script>
         <script>
-            if('${dw.system.Site.current.preferences.custom.credovaMode}' === 'Live'){
-      CRDV.plugin.config({ environment: CRDV.Environment.Production, store: "${dw.system.Site.current.preferences.custom.credovaApiUsername}" });
-    }else{
-      CRDV.plugin.config({ environment: CRDV.Environment.Sandbox, store: "${dw.system.Site.current.preferences.custom.credovaApiUsername}" });
-    }
+            if ('${dw.system.Site.current.preferences.custom.credovaMode}' === 'Live'){
+                CRDV.plugin.config({ environment: CRDV.Environment.Production, store: "${dw.system.Site.current.preferences.custom.credovaApiUsername}" });
+            } else {
+                CRDV.plugin.config({ environment: CRDV.Environment.Sandbox, store: "${dw.system.Site.current.preferences.custom.credovaApiUsername}" });
+            }
             CRDV.plugin.inject("credova-button");
 
             CRDV.plugin.addEventListener(function(e) {
             if (e.eventName === CRDV.EVENT_USER_WAS_APPROVED) {
-                //alert("User was approved and publicId is " + e.eventArgs.publicId);
                 $.ajax({
                     url: '${URLUtils.url('Credova-Set')}',
                     type: 'post',

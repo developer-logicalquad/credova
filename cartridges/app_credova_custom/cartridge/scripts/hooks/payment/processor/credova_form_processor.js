@@ -14,7 +14,7 @@ var site = require('dw/system/Site').current;
  * @returns {Object} an object that has error information or payment information
  */
 function processForm(req, paymentForm, viewFormData) {
-    var service = require('*/cartridge/services/credovaService');
+    var service = require('*/cartridge/scripts/services/credovaService');
     var collections = require('*/cartridge/scripts/util/collections');
     var basket = BasketMgr.getCurrentBasket();
     var viewData = viewFormData;
@@ -22,6 +22,7 @@ function processForm(req, paymentForm, viewFormData) {
     var apikey = site.getCustomPreferenceValue('credovaApiUsername');
     var address = '';
     var fields = {};
+    var isFirearm = false;
     viewData.paymentMethod = {
         value: paymentForm.paymentMethod.value,
         htmlName: paymentForm.paymentMethod.value
@@ -41,13 +42,16 @@ function processForm(req, paymentForm, viewFormData) {
 
             if (item instanceof dw.order.ProductLineItem) {
                 products.push({
-                    id: item.UUID,
+                    id: item.productID,
                     description: item.productName,
                     serialNumber: item.UUID,
                     quantity: item.quantity.value,
                     value: item.adjustedNetPrice.value,
                     salesTax: item.tax.value
                 });
+                if (item.getProduct().custom.availableForInStorePickup && !isFirearm) {
+                    isFirearm = true;
+                }
             }
         });
     }
@@ -63,7 +67,7 @@ function processForm(req, paymentForm, viewFormData) {
             lastName: viewFormData.address.lastName.value,
             mobilePhone: viewFormData.phone.value,
             email: basket.customerEmail,
-            containsFirearm: 'false',
+            containsFirearm: isFirearm,
             address: {
                 street: address,
                 city: viewFormData.address.city.value,
@@ -76,7 +80,7 @@ function processForm(req, paymentForm, viewFormData) {
     var serviceResult = service.application.create(fields);
     if (serviceResult.publicId) {
         var publicId = serviceResult.publicId;
-        session.privacy.publicId = publicId;
+        session.privacy.publicId = publicId; // eslint-disable-line no-undef
         viewData.paymentInformation = {
             publicId: {
                 value: publicId,
@@ -87,22 +91,18 @@ function processForm(req, paymentForm, viewFormData) {
             error: false,
             viewData: viewData
         };
-    } else {
-        return {
-            errors: serviceResult.callResult,
-            error: true
-        };
     }
+    return {
+        errors: serviceResult.callResult,
+        error: true
+    };
 }
 
 /**
- * Save the credit card information to login account if save card option is selected
- * @param {Object} req - The request object
- * @param {dw.order.Basket} basket - The current basket
- * @param {Object} billingData - payment information
+ * Not compatible with current payment method
  */
-function savePaymentInformation(req, basket, billingData) {
-
+function savePaymentInformation() {
+    return;
 }
 exports.processForm = processForm;
 exports.savePaymentInformation = savePaymentInformation;

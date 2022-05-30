@@ -5,64 +5,102 @@
     <h1 class="dw-nc-text-heading dw-nc-text-heading-large dw-nc-text-brand">${Resource.msg('quicksetup.title','credovabm', null)}</h1>
     <p>${Resource.msg('quicksetup.description','credovabm', null)}</p>
 
-    <form class="stripe-quick-setup-form" id="stripe-quick-setup-form" action="${URLUtils.url('CredovaBM-HandleCredovaQuickSetup')}" method="POST">
-        <table width="100%" cellspacing="15" cellpadding="0" border="0">
-            <tbody>
-                <tr>
-                    <td style="width:30%">${Resource.msg('quicksetup.sitestoappy','credovabm', null)}</td>
-                    <td style="width:70%">
-                        <input type="hidden" id="stripe_site_ids" name="stripe_site_ids" />
-                        <isloop items="${dw.system.Site.getAllSites()}" var="site">
-                            <input id="siteid_${site.getID()}" type="checkbox" name="siteid" data-siteid="${site.getID()}" />
-                            <label for="siteid_${site.getID()}">${site.getName()}</label><br />
-                        </isloop>
-                        <strong id="quick-setup-sites-error-msg" style="display:none;color:#F00;">
+    <form class="stripe-quick-setup-form" id="stripe-quick-setup-form"
+		action="${URLUtils.url('CredovaBM-HandleCredovaQuickSetup')}" method="POST">
+	    <table width="100%" cellspacing="15" cellpadding="0" border="0">
+			<tbody>
+				<tr>
+					<td style="width:30%">
+						${Resource.msg('quicksetup.sitestoappy','stripebm', null)}
+					</td>
+					<td style="width:70%">
+						<input type="hidden" id="stripe_site_ids" name="stripe_site_ids" /> 
+						<isloop items="${dw.system.Site.getAllSites()}" var="site">
+			                <input id="siteid_${site.getID()}" type="checkbox" name="siteid"
+			                	data-siteid="${site.getID()}" />
+			                <label for="siteid_${site.getID()}">${site.getName()}</label><br />
+			            </isloop>
+			            <strong id="quick-setup-sites-error-msg" style="display:none;color:#F00;">
                             ${Resource.msg('quicksetup.nositeselectederrmsg','credovabm', null)}
                         </strong>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:30%">${Resource.msg('quicksetup.publickey','credovabm', null)}</td>
-                    <td style="width:70%">
-                        <input id="credova_public_key" name="credova_public_key" required />
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:30%">
-                        ${Resource.msg('quicksetup.privatekey','credovabm', null)}
-                    </td>
-                    <td style="width:70%">
-                        <input id="credova_private_key" name="credova_private_key" required />
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:30%">${Resource.msg('quicksetup.mode','credovabm', null)}</td>
-                    <td style="width:70%">
-                        <select id="credova_mode" name="credova_mode" required>
-                            <option value="">${Resource.msg('quicksetup.mode.select','credovabm', null)}</option>
-                            <option value="sandbox">${Resource.msg('quicksetup.mode.sandbox','credovabm', null)}</option>
-                            <option value="live">${Resource.msg('quicksetup.mode.live','credovabm', null)}</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:30%">${Resource.msg('quicksetup.minAmount','credovabm', null)}</td>
-                    <td style="width:70%"><input id="credova_min_amount" name="credova_min_amount" required /></td>
-                </tr>
-                <tr>
-                    <td style="width:30%">${Resource.msg('quicksetup.maxAmount','credovabm', null)}</td>
-                    <td style="width:70%"><input id="credova_max_amount" name="credova_max_amount" required /></td>
-                </tr>
-                <tr>
-                    <td colspan="2">${Resource.msg('quicksetup.note','credovabm', null)}</td>
-                </tr>
-                <tr><td colspan="2"><strong id="quick-setup-result"></strong></td></tr>
-                <tr>
-                    <td style="width:30%"><button type="submit" name="submit" class="button stripe-quick-setup-submit">${Resource.msg('quicksetup.setup','credovabm', null)}</button></td>
-                    <td style="width:70%"></td>
-                </tr>
-            </tbody>
-        </table>
+					</td>
+				</tr>
+				<tr>
+					<td style="width:30%">
+						${Resource.msg('quicksetup.publickey','credovabm', null)}
+					</td>
+					<td style="width:70%">
+						<input id="credova_public_key" name="credova_public_key" required />
+					</td>
+				</tr>
+				<iscomment> <tr>
+					<td style="width:30%">
+						${Resource.msg('quicksetup.url','credovabm', null)}
+					</td>
+					<td style="width:70%">
+						<select id="credova_api_url" name="credova_api_url" required>
+							<option value="">Select URL</option>
+							<option value="">Sandbox</option>
+							<option value="">Live</option>
+						</select>
+					</td>
+				</tr> </iscomment>
+				<tr>
+					<td style="width:30%">
+						${Resource.msg('quicksetup.privatekey','credovabm', null)}
+					</td>
+					<td style="width:70%">
+						<input id="credova_private_key" name="credova_private_key" required />
+					</td>
+				</tr>
+				<tr>
+					<td style="width:30%">
+						${Resource.msg('quicksetup.mode','credovabm', null)}
+					</td>
+					<td style="width:70%">
+						<select id="credova_mode" name="credova_mode" required>
+							<option value="">Select Mode</option>
+							<option value="sandbox">Sandbox</option>
+							<option value="live">Live</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td style="width:30%">
+						${Resource.msg('quicksetup.minAmount','credovabm', null)}
+					</td>
+					<td style="width:70%">
+						<input id="credova_min_amount" name="credova_min_amount" required />
+					</td>
+				</tr>
+				<tr>
+					<td style="width:30%">
+						${Resource.msg('quicksetup.maxAmount','credovabm', null)}
+					</td>
+					<td style="width:70%">
+						<input id="credova_max_amount" name="credova_max_amount" required />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						${Resource.msg('quicksetup.note','credovabm', null)}
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<strong id="quick-setup-result"></strong>
+					</td>
+				</tr>
+				<tr>
+					<td style="width:30%">
+						<button type="submit" name="submit" class="button stripe-quick-setup-submit">${Resource.msg('quicksetup.setup','credovabm', null)}</button>
+					</td>
+					<td style="width:70%">
+					</td>
+				</tr>
+			</tbody>
+	    </table>
     </form>
-    <script src="${URLUtils.staticURL('js/credovabm.js')}"></script>
+    
+    <script type="text/javascript" src="${URLUtils.staticURL('js/credovabm.js')}"></script>
 </isdecorate>

@@ -1,6 +1,3 @@
-/* eslint-env es6 */
-/* eslint-disable no-plusplus */
-
 'use strict';
 
 var PaymentMgr = require('dw/order/PaymentMgr');
@@ -68,7 +65,7 @@ exports.getCredovaPaymentMethods = function () {
  * @param {Object} paymentMethod Object containing payment method info.
  * @param {Bolean} isEnabled true if payment method needs to be enabled
  */
-exports.writePaymentMethod = function (xsw, paymentMethod, isEnabled) {
+function writePaymentMethod(xsw, paymentMethod, isEnabled) {
     /* eslint-disable indent */
     xsw.writeStartElement('payment-method');
     xsw.writeAttribute('method-id', paymentMethod.id);
@@ -97,4 +94,32 @@ exports.writePaymentMethod = function (xsw, paymentMethod, isEnabled) {
 
     xsw.writeEndElement();
     /* eslint-enable indent */
-};
+}
+/**
+ * Creates xml for import
+ * @param {*} req request object
+ * @returns {*} stringWriter object with xml
+ */
+function getXmlPaymentMethods(req) {
+    var StringWriter = require('dw/io/StringWriter');
+    var XMLStreamWriter = require('dw/io/XMLStreamWriter');
+    var stringWriter = new StringWriter();
+    var xmlWriter = new XMLStreamWriter(stringWriter);
+    xmlWriter.writeStartElement('payment-settings');
+    xmlWriter.writeAttribute('xmlns', 'http://www.demandware.com/xml/impex/paymentsettings/2009-09-15');
+
+    var credovaPaymentMethodDefinitions = getCredovaPaymentMethodDefinitions();
+    for (var i = 0; i < credovaPaymentMethodDefinitions.length; i++) {
+        var credovaPaymentMethodDefinition = credovaPaymentMethodDefinitions[i];
+        var isPaymentMethodEnabled = !!req.form[credovaPaymentMethodDefinition.id];
+
+        writePaymentMethod(xmlWriter, credovaPaymentMethodDefinition, isPaymentMethodEnabled);
+    }
+    xmlWriter.writeEndElement();
+
+    xmlWriter.close();
+
+    return stringWriter;
+}
+
+exports.getXmlPaymentMethods = getXmlPaymentMethods;

@@ -25,7 +25,7 @@
         <credential-id>CredovaCredentials</credential-id>
     </service>
     <service service-id="credova.http.token.service">
-        <service-type>HTTP</service-type>
+        <service-type>HTTPForm</service-type>
         <enabled>true</enabled>
         <log-prefix>Credova</log-prefix>
         <comm-log-enabled>true</comm-log-enabled>
